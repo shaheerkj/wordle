@@ -14,7 +14,7 @@ async function generateWord(){
         }
         else{
             const processed = await response.json()
-            return processed.word.toUpperCase();
+            return processed.word;
         }
     }
     catch{
@@ -48,10 +48,6 @@ async function validWord(wordToValidate){
 }   
 
 
-
-
-
-
 let word;
 
 
@@ -64,7 +60,7 @@ let rowCounter = 0;
 
 let wordle = "";
 
-document.addEventListener("keydown", (event)=>{
+document.addEventListener("keydown", async function(event){
 
 
     if(event.key=="Backspace" && rowCounter >= 0){
@@ -89,6 +85,9 @@ document.addEventListener("keydown", (event)=>{
         if(row[rowCounter].innerText === ""){
             row[rowCounter].innerText=event.key.toUpperCase();
         }
+        else if(rowCounter!=4){
+            row[++rowCounter].innerText=event.key.toUpperCase();    
+        }
             
         if(rowCounter != 4){
             rowCounter++;
@@ -98,17 +97,17 @@ document.addEventListener("keydown", (event)=>{
         console.log(wordle)
     }
     else if(event.key=="Enter" && wordle.length===5){
-        rowCounter = 0;
+        console.log(word);
+        
+
         if(rowSelector<=5){
+            rowCounter = 0;
             row = rows[rowSelector++].querySelectorAll(".element")
-            wordle = "";
         }
+        wordle = "";
         
     }
-    // if(rowCounter%5==0 && rowCounter != 0){
-    //     rowCounter=0;
-    //     row = rows[rowSelector++].querySelectorAll(".element")
-    // }
+    
 
     
 })
