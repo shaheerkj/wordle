@@ -87,34 +87,12 @@ document.addEventListener("keydown", async function(event){
         }
     }
     else if(event.key=="Enter" && wordle.length===5){
-        let usrWord;
-        let guessWord = await word.split('');
-        console.log(word);
-        if(await validWord(wordle)){
-            usrWord =  wordle.split('');
 
-            for(let i = 0; i < usrWord.length; i++){
-                if(usrWord[i] === guessWord[i]){
-                    row[i].classList.add("correct");
-                    guessWord[i] = "";
-                }
-            }
-            for(let i = 0; i < usrWord.length; i++){
-                if(guessWord.includes(usrWord[i]) && usrWord[i] != guessWord[i]){
-                    row[i].classList.add("misplaced");
-                    guessWord[guessWord.indexOf(usrWord[i])] = "";
-                    console.log(guessWord);
-                }
-            }
-            for(let i = 0; i < usrWord.length; i++){
-                if(guessWord[i] != ""){
-                    row[i].classList.add("incorrect");
-                }
-            }
-            if(rowSelector<=5){
-                rowCounter = 0;
-                row = rows[rowSelector++].querySelectorAll(".element")
-            }
+        
+
+        if(rowSelector<=5){
+            rowCounter = 0;
+            row = rows[rowSelector++].querySelectorAll(".element")
         }
         wordle = "";
         
