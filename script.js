@@ -49,9 +49,6 @@ async function validWord(wordToValidate){
 
 
 let word;
-
-
-
 let rowSelector = 0;
 let rows = document.querySelectorAll(".row");
 
@@ -64,8 +61,6 @@ document.addEventListener("keydown", async function(event){
 
 
     if(event.key=="Backspace" && rowCounter >= 0){
-        console.log("hello")
-        console.log(rowCounter);
         if(row[rowCounter].innerText === "" && rowCounter >0){
             rowCounter--;
         }
@@ -74,8 +69,6 @@ document.addEventListener("keydown", async function(event){
             rowCounter--;
         }
         wordle = wordle.slice(0, -1)
-        console.log(rowCounter);
-        console.log(wordle);
     }
 
     else if(isAlphabet(event.key)&& rowCounter<5){
@@ -92,13 +85,12 @@ document.addEventListener("keydown", async function(event){
         if(rowCounter != 4){
             rowCounter++;
         }
-
-        console.log(rowCounter)
-        console.log(wordle)
     }
     else if(event.key=="Enter" && wordle.length===5){
-        console.log(word);
-        
+
+        if(await validWord(wordle)){
+            console.log("hello");
+        }
 
         if(rowSelector<=5){
             rowCounter = 0;
@@ -107,7 +99,4 @@ document.addEventListener("keydown", async function(event){
         wordle = "";
         
     }
-    
-
-    
 })
